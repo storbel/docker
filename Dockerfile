@@ -23,8 +23,13 @@ RUN git clone https://github.com/openstack-dev/devstack /devstack
 # python-pip just became collatoral damage.  reinstall it.
 RUN apt-get install -q -y python-pip
 
+RUN mkdir /code
+WORKDIR /code
+ADD hello.py /code/
 # Install Flask
 RUN pip install Flask
+WORKDIR /code
+RUN cd /code
 RUN FLASK_APP=hello.py flask run
 
 
